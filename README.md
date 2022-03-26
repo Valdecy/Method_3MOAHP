@@ -39,7 +39,7 @@ Data Technologies and Applications, Vol. ahead-of-print No. ahead-of-print. http
 1. Install
 
 ```bash
-pip install method-3mo-ahp
+pip install method_3mo_ahp
 ```
 
 2. Try it in **Colab**:
