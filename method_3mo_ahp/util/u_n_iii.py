@@ -115,7 +115,7 @@ def breeding(population, srp, min_values = [-5,-5], max_values = [5,5], mu = 1, 
             elif(d_[1] < d_[0]):
                 parent_1 = i2
             elif (d_[1] == d_[0]):
-                rand  = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)
+                rand  = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
                 if (rand > 0.5):
                     parent_1 = i1
                 else:
@@ -130,23 +130,25 @@ def breeding(population, srp, min_values = [-5,-5], max_values = [5,5], mu = 1, 
             elif(d_[3] < d_[2]):
                 parent_2 = i4
             elif (d_[2] == d_[3]):
-                rand  = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)
+                rand  = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
                 if (rand > 0.5):
                     parent_2 = i3
                 else:
                     parent_2 = i4
         for j in range(0, offspring.shape[1] - len(list_of_functions)):
-            rand   = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)
-            rand_b = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)                                
+            rand   = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
+            rand_b = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)  
+            rand_c = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                               
             if (rand <= 0.5):
                 b_offspring = 2*(rand_b)
                 b_offspring = b_offspring**(1/(mu + 1))
             elif (rand > 0.5):  
                 b_offspring = 1/(2*(1 - rand_b))
                 b_offspring = b_offspring**(1/(mu + 1))       
-            offspring[i,j] = np.clip(((1 + b_offspring)*population[parent_1, j] + (1 - b_offspring)*population[parent_2, j])/2, min_values[j], max_values[j])           
-            if(i < population.shape[0] - 1):   
-                offspring[i+1,j] = np.clip(((1 - b_offspring)*population[parent_1, j] + (1 + b_offspring)*population[parent_2, j])/2, min_values[j], max_values[j]) 
+            if (rand_c >= 0.5):
+                offspring[i,j] = np.clip(((1 + b_offspring)*population[parent_1, j] + (1 - b_offspring)*population[parent_2, j])/2, min_values[j], max_values[j])           
+            else:   
+                offspring[i,j] = np.clip(((1 - b_offspring)*population[parent_1, j] + (1 + b_offspring)*population[parent_2, j])/2, min_values[j], max_values[j]) 
         for k in range (1, len(list_of_functions) + 1):
             offspring[i,-k] = list_of_functions[-k](offspring[i,0:offspring.shape[1]-len(list_of_functions)])
     return offspring  
@@ -156,10 +158,10 @@ def mutation(offspring, mutation_rate = 0.1, eta = 1, min_values = [-5,-5], max_
     d_mutation = 0            
     for i in range (0, offspring.shape[0]):
         for j in range(0, offspring.shape[1] - len(list_of_functions)):
-            probability = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)
+            probability = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
             if (probability < mutation_rate):
-                rand   = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)
-                rand_d = int.from_bytes(os.urandom(8), byteorder = "big") / ((1 << 64) - 1)                                     
+                rand   = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
+                rand_d = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                                     
                 if (rand <= 0.5):
                     d_mutation = 2*(rand_d)
                     d_mutation = d_mutation**(1/(eta + 1)) - 1
