@@ -593,7 +593,7 @@ class load_3moahp():
 
     ################################################################################
     # Function: Rank Decending (Adapted from: https://stackoverflow.com/questions/39059371/can-numpys-argsort-give-equal-element-the-same-rank)
-    def rank_decending(x):
+    def rank_descending(x):
         u, inv, counts = np.unique(x, return_inverse = True, return_counts = True)
         csum           = np.zeros_like(counts)
         csum[1:]       = counts[:-1].cumsum()
@@ -679,8 +679,8 @@ class load_3moahp():
         else:
           w1, _ = fuzzy_ahp_method(self.dataset)
           w2, _ = fuzzy_ahp_method(data)
-        w1             = rank_decending(w1)
-        w2             = rank_decending(w2)
+        w1             = rank_descending(w1)
+        w2             = rank_descending(w2)
         kendall_tau, _ = stats.kendalltau(w1, w2)
         if (math.isnan(kendall_tau)):
             kendall_tau = -1
