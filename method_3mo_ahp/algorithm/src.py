@@ -576,11 +576,8 @@ class load_3moahp():
     ################################################################################
     # Function: Rank Decending (Adapted from: https://stackoverflow.com/questions/39059371/can-numpys-argsort-give-equal-element-the-same-rank)
     def rank_descending(self, x):
-        x              = -x
-        u, inv, counts = np.unique(x, return_inverse = True, return_counts = True)
-        csum           = np.zeros_like(counts)
-        csum[1:]       = counts[:-1].cumsum()
-        return csum[inv]
+        _, inv = np.unique(-x, return_inverse = True, return_counts = False)
+        return inv 
     
     # Functions: Objective Function 0 - Consistency Ratio (MI) 
     def f0(self, variables):
