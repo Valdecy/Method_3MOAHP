@@ -448,16 +448,6 @@ class load_3moahp():
         inc_list = [ 'Index: '+str(item)+'<br>'+'Solution: Inconsistent' for item in list(self.ind_incon.index)] 
         con_list = [ 'Index: '+str(item)+'<br>'+'Solution: Consistent'   for item in list(self.ind_con.index  )] 
         if (proj_view == '2D' or proj_view == '2d'):
-            #p_trace = go.Scatter(
-                                #x         = self.indicators.iloc[self.rank_idx, 0],
-                                #y         = self.indicators.iloc[self.rank_idx, 1],
-                                #opacity   = 1,
-                                #mode      = 'markers',
-                                #marker    = dict(symbol = 'square', size = 10, color = 'blue'),
-                                #hovertext = con_list,
-                                #name      = ''
-                                #)
-            #data.append(p_trace)
             if (len(con_list) > 0):
               s_trace = go.Scatter(
                                   x         = self.ind_con.iloc[:, 0], # ~self.ind_con.index.isin(self.rank_idx)
@@ -509,16 +499,6 @@ class load_3moahp():
             fig_aut.update_traces(textfont_size = 10, textfont_color = 'white') 
             fig_aut.show() 
         elif (proj_view == '3D' or proj_view == '3d'):
-              #p_trace = go.Scatter(
-                                    #x       = self.indicators.iloc[self.rank_idx, 0],
-                                    #y       = self.indicators.iloc[self.rank_idx, 1],
-                                    #z       = self.indicators.iloc[self.rank_idx, 2],
-                                    #opacity = 1,
-                                    #mode    = 'markers',
-                                    #marker  = dict(symbol = 'square', size = 10, color = 'blue'),
-                                    #name    = ''
-                                  #)
-              #data.append(p_trace)
             if (len(con_list) > 0):
               s_trace = go.Scatter3d(
                                     x       = self.ind_con.iloc[:, 0], # ~self.ind_con.index.isin(self.rank_idx)
@@ -776,10 +756,7 @@ class load_3moahp():
         count_inc       = 0
         for idx in range(0, self.solution.shape[0]):
           sol = self.solution[idx, 0:int( ( (self.dataset.shape[0]**2 - self.dataset.shape[0])/2 ) + 1)]
-          if ('f0' in self.qidx):
-            f0_ = round(self.f0(sol),  3)
-          else:
-            f0_ = '-//-'
+          f0_ = round(self.f0(sol),  3)
           if ('f1' in self.qidx):
             f1_ = int(self.f1(sol))
           else:
@@ -814,8 +791,6 @@ class load_3moahp():
           self.ind_incon  = self.ind_incon.drop_duplicates()
           self.ind_incon  = self.ind_incon.drop(columns = self.ind_incon.columns[(self.ind_incon == '-//-').any()])
         self.indicators = self.indicators.drop(columns = self.indicators.columns[(self.indicators == '-//-').any()])
-        #self.rank       = fast_non_dominated_sorting(self.indicators.values, number_of_functions = len(self.qidx))
-        #self.rank_idx   = np.where(self.rank <= 1)[0].tolist()
         print('Total Number of Inconsistent Solutions: ', count_inc)
         print('Total Number of Consistent Solutions: '  , count_con)
         print('Total Number of Unique Consistent Solutions: ', self.ind_con.shape[0])
