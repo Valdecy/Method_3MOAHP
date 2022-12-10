@@ -29,7 +29,7 @@ class load_3moahp():
         if (len(min_limit) > 0):
           self.dataset_min = min_limit
         else:
-          self.data_set_min = np.zeros(( self.dataset.shape))
+          self.dataset_min = np.zeros(( self.dataset.shape))
           for i in range(0, self.dataset.shape[0]):
             for j in range(1, self.dataset.shape[1]):
               if (j > i):
@@ -37,7 +37,7 @@ class load_3moahp():
         if (len(max_limit) > 0):
           self.dataset_max = max_limit
         else:
-          self.data_set_max = np.zeros(( self.dataset.shape))
+          self.dataset_max = np.zeros(( self.dataset.shape))
           for i in range(0, self.dataset.shape[0]):
             for j in range(1, self.dataset.shape[1]):
               if (j > i):
