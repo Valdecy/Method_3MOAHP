@@ -679,8 +679,8 @@ class load_3moahp():
         else:
           w1, _ = fuzzy_ahp_method(self.dataset)
           w2, _ = fuzzy_ahp_method(data)
-        w1             = rank_descending(w1)
-        w2             = rank_descending(w2)
+        w1             = self.rank_descending(w1)
+        w2             = self.rank_descending(w2)
         kendall_tau, _ = stats.kendalltau(w1, w2)
         if (math.isnan(kendall_tau)):
             kendall_tau = -1
