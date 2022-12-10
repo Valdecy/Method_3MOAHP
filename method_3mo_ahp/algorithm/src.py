@@ -331,6 +331,8 @@ class load_3moahp():
       ax.grid(color = 'k', linestyle = '-', linewidth = 1)
       ax.xaxis.set_tick_params(bottom = 'off', top   = 'off', labelbottom = 'off')
       ax.yaxis.set_tick_params(left   = 'off', right = 'off', labelleft   = 'off')
+      ax.set_yticklabels([])
+      ax.set_xticklabels([])
       for i in range(0, environment.shape[0]):
         for j in range(0, environment.shape[1]):
           ax.annotate(dict_j[environment[i, j]] , xy = (0.4 + j, 0.55 + i), fontsize = 10, fontweight = 'bold')
