@@ -673,8 +673,8 @@ class load_3moahp():
         else:
           w1, _ = fuzzy_ahp_method(self.dataset)
           w2, _ = fuzzy_ahp_method(data)
-        w1             = np.argsort(w1)[::-1]
-        w2             = np.argsort(w2)[::-1]
+        w1             = abs(np.argsort(w1)-np.argmax(w1))
+        w2             = abs(np.argsort(w2)-np.argmax(w2))
         kendall_tau, _ = stats.kendalltau(w1, w2)
         if (math.isnan(kendall_tau)):
             kendall_tau = -1
