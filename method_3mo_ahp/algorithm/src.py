@@ -593,7 +593,7 @@ class load_3moahp():
 
     ################################################################################
     # Function: Rank Decending (Adapted from: https://stackoverflow.com/questions/39059371/can-numpys-argsort-give-equal-element-the-same-rank)
-    def rank_descending(x):
+    def rank_descending(self, x):
         u, inv, counts = np.unique(x, return_inverse = True, return_counts = True)
         csum           = np.zeros_like(counts)
         csum[1:]       = counts[:-1].cumsum()
