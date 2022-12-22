@@ -56,3 +56,9 @@ Fuzzy AHP:
 - Example 07 - Three Objectives: ([ Colab Demo ](https://colab.research.google.com/drive/1EMjmYHivEcm7W7RggKPbNf3Fw58E2XqH?usp=sharing))
 - Example 08 - Five Objectives: ([ Colab Demo ](https://colab.research.google.com/drive/1NNKvt-tGIxuXFGvWKcxXcsl9-jbfwnPQ?usp=sharing))
 - Example 09 - Custom Fuzzy Scale: ([ Colab Demo ](https://colab.research.google.com/drive/1uWfN804d2fIoznx-SCAXNw3ux2d45-fS?usp=sharing))
+
+3. Others
+- [pyDecision](https://github.com/Valdecy/pyDecision) - A library for many MCDA methods
+- [pyMissingAHP](https://github.com/Valdecy/pyMissingAHP) - A Method to Infer AHP Missing Pairwise Comparisons
+- [ELECTRE-Tree](https://github.com/Valdecy/ELECTRE-Tree) - Algorithm to infer the ELECTRE Tri-B method parameters
+- [Ranking-Trees](https://github.com/Valdecy/Ranking-Trees) - Algorithm to infer the ELECTRE II, III, IV and PROMETHEE I, II, III, IV method parameters
