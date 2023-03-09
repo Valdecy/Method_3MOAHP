@@ -4,7 +4,7 @@
 # UFF - Universidade Federal Fluminense (Brazil)
 # email:  valdecy.pereira@gmail.com
 # Course: Metaheuristics
-# Lesson: U-NSGA-III
+# Lesson: U-NSGA-III (Unified Non-Dominated Sorting Genetic Algorithm III)
 
 # Citation: 
 # PEREIRA, V. (2021). Project: pyMultiojective, File: u_n_iii.py, GitHub repository: <https://github.com/Valdecy/pyMultiojective>
@@ -38,6 +38,8 @@ def initial_population(population_size = 5, min_values = [-5,-5], max_values = [
         for k in range (1, len(list_of_functions) + 1):
             population[i,-k] = list_of_functions[-k](list(population[i,0:population.shape[1]-len(list_of_functions)]))
     return population
+
+############################################################################
 
 # Function: Fast Non-Dominated Sorting
 def fast_non_dominated_sorting(population, number_of_functions = 2):
@@ -91,6 +93,8 @@ def sort_population_by_rank(population, rank, rp = 'none'):
         population = population[idx,:]
     return population
 
+############################################################################
+
 # Function: Offspring
 def breeding(population, srp, min_values = [-5,-5], max_values = [5,5], mu = 1, list_of_functions = [func_1, func_2]):
     offspring   = np.copy(population)
@@ -137,8 +141,8 @@ def breeding(population, srp, min_values = [-5,-5], max_values = [5,5], mu = 1, 
                     parent_2 = i4
         for j in range(0, offspring.shape[1] - len(list_of_functions)):
             rand   = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
-            rand_b = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)  
-            rand_c = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                               
+            rand_b = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1) 
+            rand_c = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                                
             if (rand <= 0.5):
                 b_offspring = 2*(rand_b)
                 b_offspring = b_offspring**(1/(mu + 1))
@@ -161,7 +165,7 @@ def mutation(offspring, mutation_rate = 0.1, eta = 1, min_values = [-5,-5], max_
             probability = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
             if (probability < mutation_rate):
                 rand   = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)
-                rand_d = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                                     
+                rand_d = int.from_bytes(os.urandom(8), byteorder = 'big') / ((1 << 64) - 1)                                    
                 if (rand <= 0.5):
                     d_mutation = 2*(rand_d)
                     d_mutation = d_mutation**(1/(eta + 1)) - 1
@@ -250,7 +254,7 @@ def sort_population_by_association(srp, population, number_of_functions):
 ############################################################################
 
 # U-NSGA III Function
-def unified_non_dominated_sorting_genetic_algorithm_III(references = 5, mutation_rate = 0.1, min_values = [-5,-5], max_values = [5,5], list_of_functions = [func_1, func_2], generations = 5, mu = 1, eta = 1, k = 4, rp = 'none'):       
+def unified_non_dominated_sorting_genetic_algorithm_III(references = 5, mutation_rate = 0.1, min_values = [-5,-5], max_values = [5,5], list_of_functions = [func_1, func_2], generations = 5, mu = 1, eta = 1, k = 4, rp = 'none', verbose = True):       
     count      = 0
     references = max(5, references)
     M          = len(list_of_functions)
@@ -260,14 +264,15 @@ def unified_non_dominated_sorting_genetic_algorithm_III(references = 5, mutation
     offspring  = initial_population(size, min_values, max_values, list_of_functions)  
     print('Total Number of Points on Reference Hyperplane: ', int(srp.shape[0]), ' Population Size: ', int(size))
     while (count <= generations):       
-        print('Generation = ', count)
+        if (verbose == True):
+            print('Generation = ', count)
         population = np.vstack([population, offspring])
         rank       = fast_non_dominated_sorting(population, number_of_functions = M)
         population = sort_population_by_rank(population, rank, rp) 
         population = sort_population_by_association(srp, population, number_of_functions = M)
         population = population[0:size,:]
         offspring  = breeding(population, srp, min_values, max_values, mu, list_of_functions)
-        offspring  = mutation(offspring, mutation_rate, eta, min_values, max_values, list_of_functions)            
+        offspring  = mutation(offspring, mutation_rate, eta, min_values, max_values, list_of_functions)             
         count      = count + 1              
     return population[ :srp.shape[0], :]
 
