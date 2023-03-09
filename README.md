@@ -31,8 +31,8 @@ It's worth noting that our implementation can deal with AHP and Fuzzy AHP. The F
 |       8      | (  7,   8,   9) |
 |       9      | (  9,   9,   9) |
  
-Citation:
-Floriano, C.M., Pereira, V. and Rodrigues, B.e.S. (2022), **3MO-AHP: an inconsistency reduction approach through mono-, multi- or many-objective quality measures**, 
+## Citation
+Floriano, C.M., Pereira, V. and Rodrigues, B.e.S. (2022), **3MO-AHP: An Inconsistency Reduction Approach through Mono-, Multi- or Many-objective Quality Measures**, 
 Data Technologies and Applications, Vol. 56 No. 5, pp. 645-670. https://doi.org/10.1108/DTA-11-2021-0315 
 
 ## Usage
